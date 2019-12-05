@@ -4,18 +4,18 @@
       <li
         class="list-group-item"
         v-for="server in servers"
-        :key="server"
+        :key="server.id"
         @click="serverClicked(server)"
         style="cursor: pointer"
       >
-        Server #{{ server.id }}
+        <app-server :id="server.id" :status="server.status"></app-server>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import { eventBus } from '../../../../communication/src/main';
+import { eventBus } from '../../main';
 export default {
   data: function() {
     return {
@@ -33,5 +33,10 @@ export default {
       eventBus.selectServer(server);
     }
   }
+  // created() {
+  //   eventBus.$on('statusSwitched', status => {
+  //     this.server = server;
+  //   });
+  // }
 };
 </script>
